@@ -1,0 +1,33 @@
+<!-- templates/results.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4 rounded-4">
+        <h2 class="mb-4 text-center">Search Results</h2>
+        
+        {% if results %}
+            <div class="mb-3">
+                <h5>Your Details:</h5>
+                <p><strong>Name:</strong> {{ request.POST.name }}</p>
+                <p><strong>Mobile Number:</strong> {{ request.POST.mobile }}</p>
+                <p><strong>Email:</strong> {{ request.POST.email }}</p>
+            </div>
+            
+            <h5>Nearby Services:</h5>
+            <ul class="list-group">
+                {% for place in results %}
+                    <li class="list-group-item">
+                        <strong>{{ place.name }}</strong><br>
+                        <small>{{ place.address }}</small><br>
+                        <small>Phone: {{ place.phone }}</small><br>
+                        <small>Website: <a href="{{ place.website }}" target="_blank">{{ place.website }}</a></small><br>
+                        <small>Rating: {{ place.rating }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

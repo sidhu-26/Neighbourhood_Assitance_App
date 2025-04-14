@@ -1,0 +1,48 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4 rounded-4">
+        <h2 class="mb-4 text-center">🔍 Find Services Near You</h2>
+        <form method="POST" action="{% url 'search_results' %}">
+            {% csrf_token %}
+            <!-- User Information Fields -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Your Full Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" name="mobile" placeholder="Your Mobile Number" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" name="email" placeholder="Your Email Address" required>
+            </div>
+            
+            <!-- Service Type and Location -->
+            <div class="mb-3">
+                <label for="query" class="form-label">Service Type</label>
+                <input type="text" class="form-control" name="query" placeholder="e.g. plumber, tutor, laundry" required>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" name="location" placeholder="e.g. Chennai, Mumbai (Optional)">
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Search Now</button>
+        </form>
+    </div>
+</div>
+
+<script>
+// Try to get user location
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        document.getElementById('latitude').value = position.coords.latitude;
+        document.getElementById('longitude').value = position.coords.longitude;
+    });
+}
+</script>
+{% endblock %}
