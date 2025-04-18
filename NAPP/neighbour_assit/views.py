@@ -42,7 +42,7 @@ def search_results(request):
         )
 
     # Your SERP API key and URL
-    SERP_API_KEY = '61ade7be0be471dc1dabf7015d604604f57de75e8fde0e3e19284bec5bec86ca'
+    SERP_API_KEY = ''
     url = 'https://serpapi.com/search.json'
 
     # SERP API request parameters
